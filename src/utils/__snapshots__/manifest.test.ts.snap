@@ -11,17 +11,12 @@ exports[`buildManifest default manifest 1`] = `
   "config": [
     {
       "key": "multi",
-      "title": "Multi 🌐 (4KHDHub, FullFightReplays, VixSrc, WatchMMAFull)",
+      "title": "Multi 🌐 (FullFightReplays, VixSrc, WatchMMAFull)",
       "type": "checkbox",
     },
     {
       "key": "en",
       "title": "English 🇺🇸 (FullFightReplays, WatchMMAFull)",
-      "type": "checkbox",
-    },
-    {
-      "key": "hi",
-      "title": "Hindi 🇮🇳 (4KHDHub)",
       "type": "checkbox",
     },
     {
@@ -52,11 +47,11 @@ exports[`buildManifest default manifest 1`] = `
       "type": "password",
     },
   ],
-  "description": "Provides HTTP URLs from streaming websites. Configure add-on for additional languages. Add MediaFlow proxy for more URLs.
+  "description": "Modern streaming service providing HTTP URLs from Italian and English sources. Configure add-on for additional options. Add MediaFlow proxy for more URLs.
 
-Supported languages: English, Hindi, Italian
+Supported languages: English, Italian
 
-Supported sources: 4KHDHub, VixSrc, FullFightReplays, WatchMMAFull, Eurostreaming, MostraGuarda
+Supported sources: VixSrc, FullFightReplays, WatchMMAFull, Eurostreaming, MostraGuarda
 
 Supported extractors: ",
   "id": "fluxstream",
@@ -65,7 +60,7 @@ Supported extractors: ",
     "tt",
     "event:",
   ],
-  "logo": "https://emojiapi.dev/api/v1/spider_web/256.png",
+  "logo": "https://emojiapi.dev/api/v1/eye/256.png",
   "name": "FluxStream",
   "resources": [
     "stream",

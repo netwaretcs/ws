@@ -10,9 +10,9 @@ const typedEntries = <T extends object>(obj: T): [keyof T, T[keyof T]][] => (Obj
 export const buildManifest = (sources: Source[], extractors: Extractor[], config: Config): CustomManifest => {
   const manifest: CustomManifest = {
     id: envGetAppId(),
-    version: '0.58.10', // x-release-please-version
+    version: '1.0.0', // x-release-please-version
     name: envGetAppName(),
-    description: 'Provides HTTP URLs from streaming websites. Configure add-on for additional languages. Add MediaFlow proxy for more URLs.',
+    description: 'Modern streaming service providing HTTP URLs from Italian and English sources. Configure add-on for additional options. Add MediaFlow proxy for more URLs.',
     resources: [
       'stream',
     ],
@@ -23,7 +23,7 @@ export const buildManifest = (sources: Source[], extractors: Extractor[], config
     ],
     catalogs: [],
     idPrefixes: ['tmdb:', 'tt', 'event:'],
-    logo: 'https://emojiapi.dev/api/v1/spider_web/256.png',
+    logo: 'https://emojiapi.dev/api/v1/eye/256.png',
     behaviorHints: {
       p2p: false,
       configurable: true,

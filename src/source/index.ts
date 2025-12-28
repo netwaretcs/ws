@@ -1,6 +1,5 @@
 import { envGet, Fetcher } from '../utils';
 import { Eurostreaming } from './Eurostreaming';
-import { FourKHDHub } from './FourKHDHub';
 import { FullFightReplays } from './FullFightReplays';
 import { MostraGuarda } from './MostraGuarda';
 import { Source } from './Source';
@@ -14,7 +13,6 @@ export const createSources = (fetcher: Fetcher): Source[] => {
 
   return [
     // Multi-language
-    new FourKHDHub(fetcher),
     new VixSrc(fetcher),
     // Sports / Events (EN)
     new FullFightReplays(fetcher),

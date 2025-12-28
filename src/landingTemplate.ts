@@ -431,14 +431,6 @@ export function landingTemplate(manifest: CustomManifest) {
       <h2>v${manifest.version || '0.0.0'}</h2>
       <div class="description">${manifest.description.replace(/\n/g, '<br>') || ''}</div>
 
-      <div class="separator"></div>
-
-      <p style="text-align: center;">
-        <a href="https://github.com/fluxstream/fluxstream" target="_blank" class="github-link">
-          <span>View on GitHub</span>
-        </a>
-      </p>
-
       ${envGet('CONFIGURATION_DESCRIPTION') ? `
       <div class="separator"></div>
       <div style="text-align: center;">
