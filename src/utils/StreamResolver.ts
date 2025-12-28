@@ -29,7 +29,7 @@ export class StreamResolver {
       return {
         streams: [
           {
-            name: 'WebStreamr',
+            name: envGetAppName(),
             title: '⚠️ No sources found. Please re-configure the plugin.',
             externalUrl: ctx.hostUrl.href,
           },

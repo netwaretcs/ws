@@ -8,9 +8,9 @@ import { ConfigureController, ManifestController, StreamController } from './con
 import { BlockedError, logErrorAndReturnNiceString } from './error';
 import { createExtractors, ExtractorRegistry } from './extractor';
 import { createSources, Source } from './source';
-import { HomeCine } from './source/HomeCine';
-import { MeineCloud } from './source/MeineCloud';
+import { Eurostreaming } from './source/Eurostreaming';
 import { MostraGuarda } from './source/MostraGuarda';
+import { WatchMMAFull } from './source/WatchMMAFull';
 import { contextFromRequestAndResponse, envGet, envIsProd, Fetcher, StreamResolver } from './utils';
 
 if (envIsProd()) {
@@ -84,9 +84,9 @@ addon.get('/live', async (req: Request, res: Response) => {
   const ctx = contextFromRequestAndResponse(req, res);
 
   const sources: Source[] = [
-    new HomeCine(fetcher),
-    new MeineCloud(fetcher),
+    new Eurostreaming(fetcher),
     new MostraGuarda(fetcher),
+    new WatchMMAFull(fetcher),
   ];
   const hrefs = [
     ...sources.map(source => source.baseUrl),

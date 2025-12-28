@@ -15,28 +15,8 @@ exports[`buildManifest default manifest 1`] = `
       "type": "checkbox",
     },
     {
-      "key": "al",
-      "title": "Albanian 🇦🇱 (Kokoshka)",
-      "type": "checkbox",
-    },
-    {
-      "key": "de",
-      "title": "German 🇩🇪 (Einschalten, KinoGer, MegaKino, MeineCloud, StreamKiste)",
-      "type": "checkbox",
-    },
-    {
       "key": "en",
       "title": "English 🇺🇸 (FullFightReplays, WatchMMAFull)",
-      "type": "checkbox",
-    },
-    {
-      "key": "es",
-      "title": "Castilian Spanish 🇪🇸 (CineHDPlus, Cuevana, HomeCine, VerHdLink)",
-      "type": "checkbox",
-    },
-    {
-      "key": "fr",
-      "title": "French 🇫🇷 (Frembed, FrenchCloud, Movix)",
       "type": "checkbox",
     },
     {
@@ -47,11 +27,6 @@ exports[`buildManifest default manifest 1`] = `
     {
       "key": "it",
       "title": "Italian 🇮🇹 (Eurostreaming, MostraGuarda, VixSrc)",
-      "type": "checkbox",
-    },
-    {
-      "key": "mx",
-      "title": "Latin American Spanish 🇲🇽 (CineHDPlus, Cuevana, HomeCine, VerHdLink)",
       "type": "checkbox",
     },
     {
@@ -79,19 +54,19 @@ exports[`buildManifest default manifest 1`] = `
   ],
   "description": "Provides HTTP URLs from streaming websites. Configure add-on for additional languages. Add MediaFlow proxy for more URLs.
 
-Supported languages: Albanian, German, English, Castilian Spanish, French, Hindi, Italian, Latin American Spanish
+Supported languages: English, Hindi, Italian
 
-Supported sources: 4KHDHub, VixSrc, FullFightReplays, WatchMMAFull, Kokoshka, CineHDPlus, Cuevana, HomeCine, VerHdLink, Einschalten, KinoGer, MegaKino, MeineCloud, StreamKiste, Frembed, FrenchCloud, Movix, Eurostreaming, MostraGuarda
+Supported sources: 4KHDHub, VixSrc, FullFightReplays, WatchMMAFull, Eurostreaming, MostraGuarda
 
 Supported extractors: ",
-  "id": "webstreamr",
+  "id": "fluxstream",
   "idPrefixes": [
     "tmdb:",
     "tt",
     "event:",
   ],
   "logo": "https://emojiapi.dev/api/v1/spider_web/256.png",
-  "name": "WebStreamr",
+  "name": "FluxStream",
   "resources": [
     "stream",
   ],

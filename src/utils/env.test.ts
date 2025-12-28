@@ -16,18 +16,18 @@ describe('env', () => {
   });
 
   test('envGetAppId', () => {
-    expect(envGetAppId()).toBe('webstreamr');
+    expect(envGetAppId()).toBe('fluxstream');
 
-    process.env['MANIFEST_ID'] = 'webstreamr.dev';
-    expect(envGetAppId()).toBe('webstreamr.dev');
+    process.env['MANIFEST_ID'] = 'fluxstream.dev';
+    expect(envGetAppId()).toBe('fluxstream.dev');
     delete process.env['MANIFEST_ID'];
   });
 
   test('envGetAppName', () => {
-    expect(envGetAppName()).toBe('WebStreamr');
+    expect(envGetAppName()).toBe('FluxStream');
 
-    process.env['MANIFEST_NAME'] = 'WebStreamr | dev';
-    expect(envGetAppName()).toBe('WebStreamr | dev');
+    process.env['MANIFEST_NAME'] = 'FluxStream | dev';
+    expect(envGetAppName()).toBe('FluxStream | dev');
     delete process.env['MANIFEST_NAME'];
   });
 

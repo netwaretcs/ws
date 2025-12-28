@@ -1,7 +1,7 @@
 {
-  "name": "webstreamr",
-  "description": "Provides HTTP URLs from streaming websites.",
-  "version": "0.58.10",
+  "name": "fluxstream",
+  "description": "Modern streaming service providing HTTP URLs from Italian and English streaming sources.",
+  "version": "1.0.0",
   "type": "commonjs",
   "scripts": {
     "analyse": "tsc --noEmit --project ./tsconfig.dev.json",
@@ -16,16 +16,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/webstreamr/webstreamr.git"
+    "url": "https://github.com/fluxstream/fluxstream.git"
   },
   "keywords": [
     "stremio",
-    "stream"
+    "stream",
+    "sports",
+    "replay",
+    "italian",
+    "english"
   ],
-  "author": "WebStreamr",
+  "author": "FluxStream",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/webstreamr/webstreamr/issues"
+    "url": "https://github.com/fluxstream/fluxstream/issues"
   },
   "engines": {
     "node": "^22.0.0 || ^24.0.0"

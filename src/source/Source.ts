@@ -26,7 +26,7 @@ export abstract class Source {
 
   private static readonly sourceResultCache = new Cacheable({
     primary: new Keyv({ store: new CacheableMemory({ lruSize: 1024 }) }),
-    secondary: new Keyv(new KeyvSqlite(`sqlite://${getCacheDir()}/webstreamr-source-cache-v2.sqlite`)),
+    secondary: new Keyv(new KeyvSqlite(`sqlite://${getCacheDir()}/fluxstream-source-cache-v2.sqlite`)),
     stats: true,
   });
 

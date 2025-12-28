@@ -17,7 +17,7 @@ export class ExtractorRegistry {
 
     this.urlResultCache = new Cacheable({
       primary: new Keyv({ store: new CacheableMemory({ lruSize: 1024 }) }),
-      secondary: new Keyv(new KeyvSqlite(`sqlite://${getCacheDir()}/webstreamr-extractor-cache.sqlite`)),
+      secondary: new Keyv(new KeyvSqlite(`sqlite://${getCacheDir()}/fluxstream-extractor-cache.sqlite`)),
       stats: true,
     });
   }
