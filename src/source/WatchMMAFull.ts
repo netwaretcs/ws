@@ -10,7 +10,7 @@ export class WatchMMAFull extends Source {
 
   public readonly label = 'WatchMMAFull';
 
-  public readonly contentTypes: ContentType[] = ['tv'];
+  public readonly contentTypes: ContentType[] = ['tv', 'movie'];
 
   public readonly countryCodes: CountryCode[] = [CountryCode.multi, CountryCode.en];
 
@@ -102,19 +102,39 @@ export class WatchMMAFull extends Source {
 
       const $ = cheerio.load(html);
 
-      // Try multiple selectors for the title
-      let title = $('h1[data-testid="hero__pageTitle"] span').first().text().trim();
+      let title: string | undefined;
+
+      // Try JSON-LD metadata first (most reliable)
+      $('script[type="application/ld+json"]').each((_i, el) => {
+        if (title) return;
+        try {
+          const jsonText = $(el).html();
+          if (jsonText) {
+            const data = JSON.parse(jsonText);
+            if (data.name) {
+              title = data.name.trim();
+            }
+          }
+        } catch (e) {
+          // Invalid JSON, continue
+        }
+      });
+
+      // Fallback to HTML selectors
+      if (!title) {
+        title = $('h1[data-testid="hero__pageTitle"] span.hero__primary-text').first().text().trim();
+      }
 
       if (!title) {
         title = $('h1').first().text().trim();
       }
 
       if (!title) {
-        // Try JSON-LD metadata
-        const jsonLd = $('script[type="application/ld+json"]').first().html();
-        if (jsonLd) {
-          const data = JSON.parse(jsonLd);
-          title = data.name || '';
+        // Try title tag as last resort
+        const pageTitle = $('title').text();
+        const match = pageTitle.match(/^([^(]+)/);
+        if (match && match[1]) {
+          title = match[1].trim();
         }
       }
 
