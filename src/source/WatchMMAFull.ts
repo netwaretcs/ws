@@ -2,7 +2,7 @@ import * as cheerio from 'cheerio';
 import levenshtein from 'fast-levenshtein';
 import { ContentType } from 'stremio-addon-sdk';
 import { Context, CountryCode, Meta } from '../types';
-import { EventId, Fetcher, getTmdbId, getTmdbNameAndYear, Id } from '../utils';
+import { EventId, Fetcher, getTmdbId, getTmdbNameAndYear, Id, ImdbId } from '../utils';
 import { Source, SourceResult } from './Source';
 
 export class WatchMMAFull extends Source {
@@ -32,10 +32,26 @@ export class WatchMMAFull extends Source {
       eventSlug = id.slug;
     } else {
       // Search by name from TMDB/IMDB
-      const tmdbId = await getTmdbId(ctx, this.fetcher, id);
-      const [name] = await getTmdbNameAndYear(ctx, this.fetcher, tmdbId, 'en');
+      let searchName: string;
 
-      const foundSlug = await this.searchEvent(ctx, name);
+      try {
+        const tmdbId = await getTmdbId(ctx, this.fetcher, id);
+        const [name] = await getTmdbNameAndYear(ctx, this.fetcher, tmdbId, 'en');
+        searchName = name;
+      } catch (error) {
+        // TMDB doesn't have this event, try to get title from IMDB directly
+        if (id instanceof ImdbId) {
+          const imdbTitle = await this.getTitleFromImdb(ctx, id.id);
+          if (!imdbTitle) {
+            return [];
+          }
+          searchName = imdbTitle;
+        } else {
+          return [];
+        }
+      }
+
+      const foundSlug = await this.searchEvent(ctx, searchName);
       if (!foundSlug) {
         return [];
       }
@@ -70,6 +86,43 @@ export class WatchMMAFull extends Source {
     });
 
     return sourceResults;
+  }
+
+  private async getTitleFromImdb(ctx: Context, imdbId: string): Promise<string | undefined> {
+    try {
+      const imdbUrl = new URL(`/title/${imdbId}/`, 'https://www.imdb.com');
+
+      const html = await this.fetcher.text(ctx, imdbUrl, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+          'Accept-Language': 'en-US,en;q=0.5',
+        },
+      });
+
+      const $ = cheerio.load(html);
+
+      // Try multiple selectors for the title
+      let title = $('h1[data-testid="hero__pageTitle"] span').first().text().trim();
+
+      if (!title) {
+        title = $('h1').first().text().trim();
+      }
+
+      if (!title) {
+        // Try JSON-LD metadata
+        const jsonLd = $('script[type="application/ld+json"]').first().html();
+        if (jsonLd) {
+          const data = JSON.parse(jsonLd);
+          title = data.name || '';
+        }
+      }
+
+      return title || undefined;
+    } catch (error) {
+      // Failed to scrape IMDB
+      return undefined;
+    }
   }
 
   private async searchEvent(ctx: Context, keyword: string): Promise<string | undefined> {
