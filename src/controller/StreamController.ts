@@ -3,7 +3,7 @@ import { Request, Response, Router } from 'express';
 import { ContentType } from 'stremio-addon-sdk';
 import winston from 'winston';
 import { Source } from '../source';
-import { contextFromRequestAndResponse, envIsProd, Id, ImdbId, StreamResolver, TmdbId } from '../utils';
+import { contextFromRequestAndResponse, envIsProd, EventId, Id, ImdbId, StreamResolver, TmdbId } from '../utils';
 
 export class StreamController {
   public readonly router: Router;
@@ -32,6 +32,8 @@ export class StreamController {
     let id: Id;
     if (rawId.startsWith('tmdb:')) {
       id = TmdbId.fromString(rawId.replace('tmdb:', ''));
+    } else if (rawId.startsWith('event:')) {
+      id = EventId.fromString(rawId.replace('event:', ''));
     } else if (rawId.startsWith('tt')) {
       id = ImdbId.fromString(rawId);
     } else {

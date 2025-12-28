@@ -1,15 +1,21 @@
 import { Context } from '../../types';
 import { Fetcher } from '../Fetcher';
 import { getImdbIdFromTmdbId, getTmdbIdFromImdbId } from '../tmdb';
+import { EventId } from './EventId';
 import { ImdbId } from './ImdbId';
 import { TmdbId } from './TmdbId';
 
+export * from './EventId';
 export * from './ImdbId';
 export * from './TmdbId';
 
-export type Id = ImdbId | TmdbId;
+export type Id = ImdbId | TmdbId | EventId;
 
 export const getImdbId = async (ctx: Context, fetcher: Fetcher, id: Id): Promise<ImdbId> => {
+  if (id instanceof EventId) {
+    throw new Error('EventId cannot be converted to ImdbId');
+  }
+
   if (id instanceof TmdbId) {
     return await getImdbIdFromTmdbId(ctx, fetcher, id);
   }
@@ -18,6 +24,10 @@ export const getImdbId = async (ctx: Context, fetcher: Fetcher, id: Id): Promise
 };
 
 export const getTmdbId = async (ctx: Context, fetcher: Fetcher, id: Id): Promise<TmdbId> => {
+  if (id instanceof EventId) {
+    throw new Error('EventId cannot be converted to TmdbId');
+  }
+
   if (id instanceof ImdbId) {
     return await getTmdbIdFromImdbId(ctx, fetcher, id);
   }

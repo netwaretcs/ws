@@ -19,9 +19,10 @@ export const buildManifest = (sources: Source[], extractors: Extractor[], config
     types: [
       'movie',
       'series',
+      'tv',
     ],
     catalogs: [],
-    idPrefixes: ['tmdb:', 'tt'],
+    idPrefixes: ['tmdb:', 'tt', 'event:'],
     logo: 'https://emojiapi.dev/api/v1/spider_web/256.png',
     behaviorHints: {
       p2p: false,
